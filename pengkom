@@ -1,0 +1,85 @@
+# Program Microwave
+
+# KAMUS
+# waktu_standar, power : array 
+# pilihan_waktu, pilihan_power : int
+
+# ALGORITMA
+print("Selamat datang di microwave simulator")
+
+# Daftar waktu standar dalam menit
+waktu_standar = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35]
+
+# Meminta pengguna untuk memilih waktu
+print("Pilih waktu memasak (1-15):")
+for i in range(len(waktu_standar)):
+    print(f"{i+1}. {waktu_standar[i]} menit")
+
+pilihan_waktu = int(input("Masukkan pilihan Anda: "))
+if pilihan_waktu < 1 or pilihan_waktu > len(waktu_standar):
+    print("Pilihan tidak valid. Harap pilih angka antara 1 dan 15.")
+    exit()
+
+waktu = waktu_standar[pilihan_waktu - 1]
+
+# Meminta pengguna untuk memilih power
+def tampilkan_pilihan(daftar, pesan):
+    for i in range(len(daftar)):
+        print(f"{i+1}. {daftar[i]}")
+    pilihan = int(input(pesan))
+    return pilihan - 1
+
+def memilih_power():
+    power = ["Low", "Medium Low(Defrost) ", "Medium", "Medium High", "High"]
+    print("\nPilih level kekuatan:")
+    pilihan_power = tampilkan_pilihan(power, "Masukkan pilihan Anda (1-5): ")
+    power_terpilih = power[pilihan_power]
+    return power_terpilih
+power_dipilih = memilih_power() 
+
+# Memasak
+print(f"\nPemanasan pada kekuatan {power_dipilih} selama {waktu} menit...")
+
+for t in range(waktu, 0, -1):
+    print(f"{t} menit tersisa...")
+
+print("Makanan Anda sudah siap!")
+
+reheat = input("Apakah ingin memanaskan lagi? [ya] [tidak] ")
+while reheat == "ya":
+    print("Pilih waktu memasak (1-15):")
+    for i in range(len(waktu_standar)):
+        print(f"{i+1}. {waktu_standar[i]} menit")
+
+    pilihan_waktu = int(input("Masukkan pilihan Anda: "))
+    if pilihan_waktu < 1 or pilihan_waktu > len(waktu_standar):
+        print("Pilihan tidak valid. Harap pilih angka antara 1 dan 15.")
+        exit()
+
+    waktu = waktu_standar[pilihan_waktu - 1]
+
+    print("\nPilih power:")
+    power = ["Low", "Medium Low(Defrost) ", "Medium", "Medium High", "High"]
+    for i in range(len(power)):
+        print(f"{i+1}. {power[i]}")
+
+    pilihan_power = int(input("Masukkan pilihan Anda (1-5): "))
+    if pilihan_power < 1 or pilihan_power > len(power):
+        print("Pilihan tidak valid. Harap pilih 1, 2, 3, 4, atau 5.")
+        exit()
+
+    power_terpilih = power[pilihan_power - 1]
+
+    print(f"\nPemanasan pada power {power_terpilih} selama {waktu} menit...")
+
+    for t in range(waktu, 0, -1):
+        print(f"{t} menit tersisa...")
+
+    print("Makanan Anda sudah siap!")
+
+    reheat = input("Apakah ingin memanaskan lagi? [ya] [tidak] ")
+
+    if reheat == "tidak":
+        break
+
+print("microwave off")
